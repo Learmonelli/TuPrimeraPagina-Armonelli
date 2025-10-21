@@ -1,5 +1,6 @@
 from django.db import models
 
+<<<<<<< HEAD
 # Modelo 1: Autor
 class Autor(models.Model):
     nombre = models.CharField(max_length=50)
@@ -30,3 +31,6 @@ class Post(models.Model):
 
     def __str__(self):
         return f"{self.titulo} por {self.autor.nombre}"
+=======
+# Create your models here.
+>>>>>>> 7bed4b622a83b04c03b059811894e8facb9b3575

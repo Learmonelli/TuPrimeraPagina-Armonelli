@@ -1,4 +1,5 @@
 from django.shortcuts import render
+<<<<<<< HEAD
 from django.http import HttpResponse
 
 from .models import Autor, Categoria, Post
@@ -110,3 +111,7 @@ def buscar_post(request):
     }
 
     return render(request, 'blog/buscar_post.html', contexto)
+=======
+
+# Create your views here.
+>>>>>>> 7bed4b622a83b04c03b059811894e8facb9b3575

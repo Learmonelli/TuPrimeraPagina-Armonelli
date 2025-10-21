@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # TuPrimeraPaginaArmonelli 
 
 ## Proyecto Web Django (Patrón MVT)
@@ -23,3 +24,6 @@ Las funcionalidades deben probarse en el siguiente orden para evitar errores de 
 | **3. Crear Post** | `/post/crear/` | Formulario principal. Utiliza los IDs del autor y la categoría creados. |
 | **4. Buscar Post** | `/post/buscar/` | Permite buscar posts por el título (búsqueda parcial). |
 | **5. Inicio** | `/` | Página principal que muestra el listado de los últimos posts. |
+=======
+# TuPrimeraPagina-Armonelli
+>>>>>>> 7bed4b622a83b04c03b059811894e8facb9b3575
