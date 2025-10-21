@@ -1,0 +1,48 @@
+{% extends "blog\base.html" %}
+
+{% block titulo %}Crear Post{% endblock %}
+
+{% block contenido_que_cambia %}
+    <h2>Crear Nuevo Post</h2>
+    
+    {% if mensaje %}
+        <p style="color: red;">{{ mensaje }}</p>
+    {% endif %}
+
+    <form method="POST">
+        {% csrf_token %}
+        
+        <table>
+            {{ formulario.as_table }}
+        </table>
+        
+        <input type="submit" value="Publicar Post">
+    </form>
+
+    <hr>
+    <h3>Ayuda para IDs</h3>
+    <p class="mensaje">{{ ayuda_mensaje }}</p>
+    
+    <h4>Autores (ID : Nombre)</h4>
+    {% if autores %}
+        <ul>
+        {% for autor in autores %}
+            <li><strong>{{ autor.id }}</strong> : {{ autor.nombre }} {{ autor.apellido }}</li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No hay autores creados. Debes crear uno primero.</p>
+    {% endif %}
+    
+    <h4>Categorías (ID : Nombre)</h4>
+    {% if categorias %}
+        <ul>
+        {% for cat in categorias %}
+            <li><strong>{{ cat.id }}</strong> : {{ cat.nombre }}</li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No hay categorías creadas. Debes crear una primero.</p>
+    {% endif %}
+
+{% endblock %}

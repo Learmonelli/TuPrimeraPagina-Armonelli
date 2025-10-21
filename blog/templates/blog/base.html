@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block titulo %}Mi Primera Pagina{% endblock %}</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #f4f4f9; color: #333; }
+        header { background-color: #333; color: white; padding: 1em; text-align: center; }
+        nav a { color: white; margin: 0 15px; text-decoration: none; font-weight: bold; }
+        main { padding: 20px; max-width: 900px; margin: 20px auto; background-color: white; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        footer { text-align: center; padding: 1em; background-color: #eee; border-top: 1px solid #ccc; margin-top: 20px;}
+        h2 { border-bottom: 2px solid #ccc; padding-bottom: 10px; }
+        form input[type="submit"] { background-color: #5cb85c; color: white; padding: 10px 15px; border: none; border-radius: 4px; cursor: pointer; }
+        form input[type="submit"]:hover { background-color: #4cae4c; }
+        ul { list-style: none; padding: 0; }
+        li { margin-bottom: 15px; padding: 10px; border: 1px solid #ddd; border-radius: 4px; }
+        .mensaje { color: green; font-weight: bold; margin-bottom: 10px; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Mi Blog MVT</h1>
+        <nav>
+            <a href="{% url 'Inicio' %}">Inicio</a> |
+            <a href="{% url 'CrearAutor' %}">👤 Crear Autor</a> |
+            <a href="{% url 'CrearCategoria' %}">🏷️ Crear Categoría</a> |
+            <a href="{% url 'CrearPost' %}">✍️ Crear Post</a> |
+            <a href="{% url 'BuscarPost' %}">🔍 Buscar Post</a>
+        </nav>
+    </header>
+    
+    <main>
+        {% block contenido_que_cambia %}
+        {% endblock %}
+    </main>
+
+    <footer>
+        <p>&copy; {% now "Y" %} Mi Proyecto Web.</p>
+    </footer>
+</body>
+</html>

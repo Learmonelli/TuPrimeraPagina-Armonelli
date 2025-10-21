@@ -1,0 +1,21 @@
+{% extends "blog\base.html" %}
+
+{% block titulo %}Crear Categoría{% endblock %}
+
+{% block contenido_que_cambia %}
+    <h2>Crear Nueva Categoría</h2>
+    
+    {% if mensaje %}
+        <p style="color: red;">{{ mensaje }}</p>
+    {% endif %}
+
+    <form method="POST">
+        {% csrf_token %}
+        
+        <table>
+            {{ formulario.as_table }}
+        </table>
+        
+        <input type="submit" value="Guardar Categoría">
+    </form>
+{% endblock %}

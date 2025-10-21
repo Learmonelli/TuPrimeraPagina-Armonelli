@@ -1,0 +1,26 @@
+{% extends "blog\base.html" %}
+
+{% block titulo %}Inicio del Blog{% endblock %}
+
+{% block contenido_que_cambia %}
+    <h2>Últimos Posts Publicados</h2>
+
+    {% if mensaje %}
+        <p class="mensaje">{{ mensaje }}</p>
+    {% endif %}
+
+    {% if posts %}
+        <ul>
+        {% for post in posts %}
+            <li>
+                <h3>{{ post.titulo }}</h3>
+                <p><strong>{{ post.subtitulo }}</strong></p>
+                <p>{{ post.cuerpo|truncatechars:200 }}</p>
+                <small>Por: <strong>{{ post.autor }}</strong> | Categoría: {{ post.categoria }} | Creado: {{ post.fecha_creacion }}</small>
+            </li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No hay posts disponibles. Utiliza el menú para crear el primero.</p>
+    {% endif %}
+{% endblock %}
