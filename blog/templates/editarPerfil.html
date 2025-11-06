@@ -1,0 +1,29 @@
+{% extends 'base.html' %} 
+{% load static %}
+
+{% block titulo %}Editar Mi Perfil{% endblock %}
+
+{% block contenido_que_cambia %}
+
+    <h2>📝 Editar Mi Perfil</h2>
+    <p>Modifica tu información de usuario y luego haz clic en "Guardar Cambios".</p>
+
+    <form method="POST">
+        {% csrf_token %} {% if messages %}
+            {% for message in messages %}
+                <div class="mensaje">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+
+        {{ form.as_p }}
+        
+        <input type="submit" value="Guardar Cambios">
+    </form>
+
+    <hr>
+    
+    <p>
+        <a href="{% url 'perfil' %}">Cancelar y Volver al Perfil</a>
+    </p>
+
+{% endblock %}

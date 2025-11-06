@@ -4,6 +4,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block titulo %}Mi Primera Pagina{% endblock %}</title>
     <style>
+        /* ... Tu CSS actual ... */
         body { font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #f4f4f9; color: #333; }
         header { background-color: #333; color: white; padding: 1em; text-align: center; }
         nav a { color: white; margin: 0 15px; text-decoration: none; font-weight: bold; }
@@ -26,6 +27,17 @@
             <a href="{% url 'CrearCategoria' %}">🏷️ Crear Categoría</a> |
             <a href="{% url 'CrearPost' %}">✍️ Crear Post</a> |
             <a href="{% url 'BuscarPost' %}">🔍 Buscar Post</a>
+            
+            |
+
+            {% if user.is_authenticated %}
+                <a href="{% url 'perfil' %}">👋 Perfil de **{{ user.username }}**</a> |
+                <a href="{% url 'editar_perfil' %}">⚙️ Editar Perfil</a> |
+                <a href="{% url 'logout' %}">🚪 Cerrar Sesión</a>
+            {% else %}
+                <a href="{% url 'login' %}">🔑 Iniciar Sesión</a> |
+                <a href="{% url 'registro' %}">📝 Registro</a>
+            {% endif %}
         </nav>
     </header>
     
