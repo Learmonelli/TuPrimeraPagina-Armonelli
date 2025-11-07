@@ -1,0 +1,33 @@
+{% extends 'base.html' %} 
+
+{% block titulo %}{{ post.titulo }}{% endblock %}
+
+{% block contenido_que_cambia %}
+    
+    <h2>{{ post.titulo }}</h2>
+    <h3>{{ post.subtitulo }}</h3>
+    
+    <p>Por: {{ post.autor }} | Publicado: {{ post.fecha_creacion|date:"d M Y" }}</p>
+    
+    {% if post.imagen %}
+        <img src="{{ post.imagen.url }}" alt="{{ post.titulo }}" style="max-width: 100%;">
+    {% endif %}
+
+    <hr>
+    
+    <div class="post-cuerpo">
+        {{ post.cuerpo|safe }} 
+    </div>
+    
+    <hr>
+    
+    {% if request.user.is_authenticated %}
+    <p>
+        <a href="{% url 'editar_post' post.pk %}">✏️ Editar Post</a> | 
+        <a href="{% url 'eliminar_post' post.pk %}">🗑️ Eliminar Post</a>
+    </p>
+    {% endif %}
+    
+    <p><a href="{% url 'Inicio' %}">Volver al Listado</a></p>
+
+{% endblock %}

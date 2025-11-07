@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block titulo %}Acerca de Mí - {{ block.super }}{% endblock %}
+
+{% block contenido_que_cambia %}
+<header class="masthead" style="background-image: url('{% static 'blog/assets/img/about-bg.jpg' %}')">
+    <div class="container position-relative px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <div class="page-heading">
+                    <h1>Acerca de Mí</h1>
+                    <span class="subheading">Entre la sociología, los datos y la curiosidad por la tecnología.</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<main class="mb-4">
+    <div class="container px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <h2>Quién soy</h2>
+                <p>Vengo del campo de la sociología, un lugar donde aprendí a observar cómo se mueven las personas, las ideas y los sistemas. 
+                Con el tiempo, descubrí que la tecnología también es una forma de mirar el mundo —una que combina la lógica con la creatividad.</p>
+
+                <h2>Mi relación con la tecnología</h2>
+                <p>Hoy me considero un entusiasta del aprendizaje constante. 
+                Me interesa explorar diferentes áreas vinculadas a la tecnología: el análisis de datos, la automatización con Python, 
+                el desarrollo web y la inteligencia artificial. 
+                Cada herramienta nueva es una oportunidad para entender un poco mejor cómo funcionan las cosas.</p>
+
+                <h2>Mis intereses personales</h2>
+                <p>Fuera del código, disfruto mucho de la lectura y la música. 
+                Son espacios donde encuentro inspiración, calma y nuevas formas de pensar. 
+                Creo que la creatividad no se limita a un solo lenguaje —puede expresarse tanto en una línea de código como en una canción o un buen libro.</p>
+
+                <h2>Sobre este sitio</h2>
+                <p>Este blog nació como un proyecto de aprendizaje, pero se transformó en un lugar personal: 
+                un espacio para experimentar, compartir ideas y conectar mis intereses en torno a la tecnología, los datos y la mirada social.</p>
+
+                <div class="text-center mt-5">
+                    <img class="img-fluid rounded-circle" src="{% static 'blog/assets/img/profile.jpg' %}" alt="Leandro Armonelli" style="max-width: 250px;">
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}

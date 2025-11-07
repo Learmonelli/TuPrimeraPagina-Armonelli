@@ -26,8 +26,10 @@ urlpatterns = [
     path('perfil/', views.perfil, name='perfil'),
     path('editar-perfil/', views.editarPerfil, name='editar_perfil'),
     path('avatar/agregar/', views.agregarAvatar, name='agregar_avatar'), # Ruta de Avatar
+    path('about/', views.about, name='about'),
     
-    # Si quieres mantener el alias antiguo por compatibilidad:
-    # path('editarPerfil/', views.editarPerfil, name='EditarPerfil'), 
-
+ 
+    path('pages/<int:pk>/', views.detalle_post, name='detalle_post'), 
+    # ...
 ]
+

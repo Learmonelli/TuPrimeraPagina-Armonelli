@@ -137,6 +137,9 @@ def registro(request):
         
     return render(request, 'registro.html', {'form': form})
 
+def about(request):
+    """Vista de la página 'Acerca de mí'."""
+    return render(request, 'about.html')
 
 @login_required 
 def editarPerfil(request):
