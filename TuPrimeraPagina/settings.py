@@ -127,3 +127,11 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+
+# Define la URL pública para acceder a los archivos media subidos
+MEDIA_URL = '/media/'
+
+# Define la ruta física donde se guardarán los archivos en el sistema (ej: D:/cursos/miprimerpagina/media)
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

@@ -1,0 +1,21 @@
+{% extends 'base.html' %} 
+
+{% block titulo %}Subir Avatar{% endblock %}
+
+{% block contenido_que_cambia %}
+
+    <h2>👤 Subir/Cambiar Avatar</h2>
+    <p>Selecciona una imagen para tu perfil.</p>
+
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        
+        {{ form.as_p }}
+        
+        <button type="submit">Guardar Avatar</button>
+    </form>
+    
+    <hr>
+    <p><a href="{% url 'perfil' %}">Volver a mi Perfil</a></p>
+
+{% endblock %}

@@ -1,6 +1,8 @@
 from django import forms
 from django.contrib.auth.forms import UserChangeForm
 from django.contrib.auth.models import User
+from .models import Avatar # Asegúrate de importar el modelo Avatar
+
 # Formulario para crear un Autor
 class AutorFormulario(forms.Form):
     nombre = forms.CharField(max_length=50)
@@ -26,7 +28,14 @@ class PostFormulario(forms.Form):
 class BusquedaPostFormulario(forms.Form):
     criterio_busqueda = forms.CharField(max_length=100, label='Buscar Post por Título')
 
-    
+
+# ... (Tus otros formularios como AutorFormulario, etc.)
+
+class AvatarForm(forms.ModelForm):
+    class Meta:
+        model = Avatar
+        # Solo necesitamos el campo 'imagen' para que el usuario pueda subir el avatar
+        fields = ['imagen']
 
 class EditProfileForm(UserChangeForm):
     class Meta:

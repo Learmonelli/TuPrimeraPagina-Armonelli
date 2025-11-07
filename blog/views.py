@@ -1,16 +1,14 @@
-from django.shortcuts import render, redirect # Importaciones generales de Django
-from django.http import HttpResponse # Si la necesitas, aunque 'render' es mejor
+from django.shortcuts import render, redirect 
+from django.http import HttpResponse 
 
 from django.contrib import messages
-from django.contrib.auth.forms import UserCreationForm # Para la vista 'registro'
-from django.contrib.auth.decorators import login_required # Para vistas protegidas
-from django.contrib.auth.forms import UserChangeForm # O tu formulario personalizado 'EditProfileForm'
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm 
+from django.contrib.auth.decorators import login_required 
 
 # Importaciones de Modelos y Formularios de tu aplicación
-from .models import Autor, Categoria, Post
-from .forms import AutorFormulario, CategoriaFormulario, PostFormulario, BusquedaPostFormulario
-# Asegúrate de importar tu formulario personalizado si lo usas:
-# from .forms import EditProfileForm 
+from .models import Autor, Categoria, Post, Avatar 
+from .forms import AutorFormulario, CategoriaFormulario, PostFormulario, BusquedaPostFormulario, AvatarForm
+from django.shortcuts import render, redirect, get_object_or_404
 
 
 # =================================================================
@@ -19,7 +17,7 @@ from .forms import AutorFormulario, CategoriaFormulario, PostFormulario, Busqued
 
 def inicio(request):
     """Página de inicio que lista los últimos posts."""
-    posts = Post.objects.all().order_by('-fecha_creacion')[:5] # Muestra los 5 más recientes
+    posts = Post.objects.all().order_by('-fecha_creacion')[:5] 
     contexto = {'posts': posts}
     return render(request, "inicio.html", contexto)
 
@@ -27,6 +25,7 @@ def inicio(request):
 # =================================================================
 # 2. VISTAS DE CREACIÓN (CRUD - Create)
 # =================================================================
+# ... (crear_autor, crear_categoria, crear_post - sin cambios)
 
 def crear_autor(request):
     if request.method == 'POST':
@@ -111,7 +110,6 @@ def buscar_post(request):
 
     if request.GET.get("criterio_busqueda"):
         criterio = request.GET["criterio_busqueda"]
-        # Filtra Posts cuyo título contenga (icontains) el criterio de búsqueda
         posts_encontrados = Post.objects.filter(titulo__icontains=criterio)
         
     contexto = {
@@ -140,28 +138,48 @@ def registro(request):
     return render(request, 'registro.html', {'form': form})
 
 
-@login_required # con este decorador exigimos que el usuario esté logueado para utilizar esta view
+@login_required 
 def editarPerfil(request):
-    # Si usas tu formulario personalizado 'EditProfileForm', reemplaza UserChangeForm
-    # form_class = EditProfileForm 
     form_class = UserChangeForm 
     
     if request.method == 'POST':
-        # Se enlaza la data enviada (request.POST) con la instancia del usuario actual
         form = form_class(request.POST, instance=request.user)
         if form.is_valid():
-            form.save() # Guarda los cambios del usuario
+            form.save() 
             messages.success(request, 'Perfil actualizado con éxito.')
-            return redirect('perfil') # Redirige a la URL con nombre 'perfil'
+            return redirect('perfil') 
     else:
-        # Se inicializa el formulario con los datos actuales del usuario
         form = form_class(instance=request.user)
         
-    # Renderiza la plantilla, pasando el formulario
     return render(request, 'editarPerfil.html', {'form': form})
+
 
 @login_required 
 def perfil(request):
     """Muestra la información básica del usuario logueado."""
     # Simplemente renderizamos una plantilla con la información del usuario
     return render(request, 'perfil.html', {})
+    
+    
+@login_required
+def agregarAvatar(request): # 🌟 VISTA PARA GESTIONAR EL AVATAR
+    try:
+        # Intenta obtener la instancia de Avatar existente para el usuario
+        avatar_instancia = request.user.avatar
+    except:
+        # Si no existe (es la primera vez que sube), crea un objeto sin guardar
+        avatar_instancia = Avatar(user=request.user) 
+
+    if request.method == 'POST':
+        # Pasamos la data, los archivos (request.FILES) y la instancia
+        form = AvatarForm(request.POST, request.FILES, instance=avatar_instancia)
+        if form.is_valid():
+            avatar = form.save(commit=False)
+            avatar.user = request.user
+            avatar.save()
+            messages.success(request, 'Avatar actualizado con éxito.')
+            return redirect('perfil') 
+    else:
+        form = AvatarForm(instance=avatar_instancia)
+        
+    return render(request, 'agregar_avatar.html', {'form': form})

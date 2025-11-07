@@ -1,7 +1,5 @@
 from django.urls import path
 from . import views
-# No necesitas importar 'editarPerfil' aquí si ya tienes 'from . import views'
-# from .views import editarPerfil # <-- Línea Eliminada
 
 urlpatterns = [
     # ==================================
@@ -24,16 +22,12 @@ urlpatterns = [
     # ==================================
     # 4. Vistas de Autenticación y Perfil
     # ==================================
-    
-    # URL de Registro
-    path('registro/', views.registro, name='registro'), 
-    
-    # URL para ver el Perfil (necesaria para la redirección de edición)
+    path('registro/', views.registro, name='registro'),
     path('perfil/', views.perfil, name='perfil'),
+    path('editar-perfil/', views.editarPerfil, name='editar_perfil'),
+    path('avatar/agregar/', views.agregarAvatar, name='agregar_avatar'), # Ruta de Avatar
     
-    # URL para Editar el Perfil - **RECOMENDACIÓN:** Usa una URL consistente:
-    path('editar-perfil/', views.editarPerfil, name='editar_perfil'), 
-    
-    # Si quieres mantener tu URL antigua por un tiempo, puedes añadirla como alias:
+    # Si quieres mantener el alias antiguo por compatibilidad:
     # path('editarPerfil/', views.editarPerfil, name='EditarPerfil'), 
+
 ]

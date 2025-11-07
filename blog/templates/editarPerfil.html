@@ -6,10 +6,16 @@
 {% block contenido_que_cambia %}
 
     <h2>📝 Editar Mi Perfil</h2>
-    <p>Modifica tu información de usuario y luego haz clic en "Guardar Cambios".</p>
+    <p>Modifica tu información de usuario (nombre, apellido, email).</p>
+    
+    <div style="margin-bottom: 20px;">
+        <a href="{% url 'agregar_avatar' %}" class="btn-link">🖼️ **Subir o Cambiar Avatar**</a>
+    </div>
 
     <form method="POST">
-        {% csrf_token %} {% if messages %}
+        {% csrf_token %} 
+        
+        {% if messages %}
             {% for message in messages %}
                 <div class="mensaje">{{ message }}</div>
             {% endfor %}
@@ -23,7 +29,9 @@
     <hr>
     
     <p>
-        <a href="{% url 'perfil' %}">Cancelar y Volver al Perfil</a>
+        <a href="{% url 'perfil' %}">Cancelar y Volver al Perfil</a> | 
+        <a href="{% url 'password_change' %}">Cambiar Contraseña</a> 
     </p>
 
 {% endblock %}
+
