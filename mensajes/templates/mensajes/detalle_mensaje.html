@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+{% block titulo %}Mensaje de {{ mensaje.emisor.username }}{% endblock %}
+
+{% block contenido_que_cambia %}
+    <div class="mensaje-detalle">
+        <h2>Detalle del Mensaje</h2>
+        
+        {% if mensaje.leido %}
+            <p class="leido">✅ Leído el: {{ mensaje.fecha_lectura|date:"d M, Y H:i" }}</p>
+        {% else %}
+            <p class="no-leido">⚠️ No Leído</p>
+        {% endif %}
+
+        <hr>
+
+        <p><strong>De:</strong> {{ mensaje.emisor.username }}</p>
+        <p><strong>Para:</strong> {{ mensaje.receptor.username }}</p>
+        <p><strong>Asunto:</strong> {{ mensaje.asunto }}</p>
+        <p><strong>Enviado:</strong> {{ mensaje.fecha_envio|date:"d M, Y H:i" }}</p>
+        
+        <hr>
+        
+        <div class="cuerpo-mensaje">
+            <h3>Mensaje:</h3>
+            <p>{{ mensaje.cuerpo }}</p>
+        </div>
+        
+        <hr>
+        
+        <a href="{% url 'bandeja_entrada' %}" class="btn-volver">
+            &larr; Volver a la Bandeja
+        </a>
+        
+        {% if mensaje.emisor != user %}
+            <a href="{% url 'enviar_mensaje' %}?receptor={{ mensaje.emisor.username }}&asunto=RE: {{ mensaje.asunto }}" class="btn-responder">
+                Responder
+            </a>
+        {% endif %}
+    </div>
+
+    <style>
+        .mensaje-detalle {
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .leido { color: green; font-weight: bold; }
+        .no-leido { color: orange; font-weight: bold; }
+        .cuerpo-mensaje {
+            margin-top: 20px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-left: 5px solid #007bff;
+            background: white;
+            white-space: pre-wrap; /* Respeta saltos de línea y espacios */
+        }
+        .btn-volver, .btn-responder {
+            display: inline-block;
+            padding: 10px 15px;
+            margin-top: 15px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+        .btn-volver {
+            background-color: #6c757d;
+            color: white;
+        }
+        .btn-responder {
+            background-color: #007bff;
+            color: white;
+        }
+    </style>
+{% endblock %}

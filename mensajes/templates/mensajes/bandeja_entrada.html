@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+{% block titulo %}Bandeja de Entrada{% endblock %}
+
+{% block contenido_que_cambia %}
+    <style>
+        .mensaje-no-leido {
+            background-color: #fff3cd; /* Amarillo claro */
+            border-left: 5px solid #ffc107; /* Borde izquierdo para destacar */
+        }
+        .mensaje-leido {
+            background-color: #f8f9fa; /* Gris muy claro */
+        }
+        .mensaje-titulo-bold {
+            font-weight: bold;
+        }
+        .mensaje-titulo-normal {
+            font-weight: normal;
+        }
+        .mensaje-enlace {
+            /* Estilo para que el bloque sea clickeable sin parecer un enlace tradicional */
+            display: block;
+            text-decoration: none;
+            color: inherit; /* Hereda el color del texto */
+        }
+        .mensaje-enlace:hover > div {
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+        }
+    </style>
+
+    <h2 style="margin-bottom: 25px;">
+        <span style="color: #007bff;">✉️</span> Bandeja de Entrada de {{ user.username }}
+    </h2>
+    <hr>
+    
+    <p>
+        <a href="{% url 'enviar_mensaje' %}" 
+           style="background-color: #28a745; color: white; padding: 10px 15px; border-radius: 5px; text-decoration: none; font-weight: bold;">
+            Redactar Nuevo Mensaje
+        </a>
+    </p>
+
+    {% if mensajes %}
+        <div style="margin-top: 20px;">
+            {% for mensaje in mensajes %}
+                <a href="{% url 'detalle_mensaje' mensaje.pk %}" class="mensaje-enlace">
+                    <div style="border: 1px solid #ddd; padding: 15px; margin-bottom: 10px; border-radius: 8px;" class="{% if not mensaje.leido %}mensaje-no-leido{% else %}mensaje-leido{% endif %}">
+                        
+                        <h5 style="margin-top: 0;" class="{% if not mensaje.leido %}mensaje-titulo-bold{% else %}mensaje-titulo-normal{% endif %}">
+                            De: {{ mensaje.emisor.username }} 
+                            <span style="font-size: 0.8em; color: #6c757d;">
+                                ({{ mensaje.fecha_envio|date:"d M Y, H:i" }})
+                            </span>
+                            {% if not mensaje.leido %}
+                                <span style="color: #dc3545; font-size: 0.8em;">(NO LEÍDO)</span>
+                            {% endif %}
+                        </h5>
+                        
+                        <p style="margin-bottom: 0;">
+                            {{ mensaje.cuerpo|truncatechars:150 }}
+                            <small style="color: #007bff; font-weight: bold; display: block; margin-top: 5px;">
+                                Leer mensaje completo →
+                            </small>
+                        </p>
+                        
+                    </div>
+                </a>
+                {% endfor %}
+        </div>
+    {% else %}
+        <div style="margin-top: 30px; padding: 20px; border: 1px dashed #6c757d; border-radius: 5px; text-align: center;">
+            <p style="font-size: 1.1em; color: #6c757d;">No tienes mensajes en tu bandeja de entrada.</p>
+        </div>
+    {% endif %}
+{% endblock %}

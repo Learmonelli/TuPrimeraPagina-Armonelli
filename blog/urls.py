@@ -1,16 +1,21 @@
+# blog/urls.py
+
 from django.urls import path
 from . import views
 
 urlpatterns = [
     # 1. Vistas Generales
-    path('', views.inicio, name='inicio'),
+    # CBV 1: PostListView
+    path('', views.PostListView.as_view(), name='inicio'),
 
     # 2. Vistas de Creación/Manipulación (CRUD - Create/Update/Delete)
     path('autor/crear/', views.crear_autor, name='crear_autor'),       
     path('categoria/crear/', views.crear_categoria, name='crear_categoria'), 
-    path('post/crear/', views.crear_post, name='crear_post'),
     
-    # 🔑 RUTA REQUERIDA: Edición de Post
+    # CBV 2: PostCreateView.as_view()
+    path('post/crear/', views.PostCrearCBV.as_view(), name='crear_post'), 
+    
+    # RUTA REQUERIDA: Edición de Post
     path('post/editar/<int:pk>/', views.editar_post, name='editar_post'), 
     
     path('post/eliminar/<int:pk>/', views.eliminar_post, name='eliminar_post'), 
