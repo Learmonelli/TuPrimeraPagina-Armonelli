@@ -6,12 +6,13 @@
 {% block contenido_que_cambia %}
 
     <h2>👋 Perfil de {{ user.username }}</h2>
+    <hr>
 
     <div style="margin-bottom: 20px;">
         <h3>Avatar Actual:</h3>
         
-        {% if user.avatar.imagen %}
-            <img src="{{ user.avatar.imagen.url }}" alt="{{ user.username }} Avatar" style="width: 150px; height: 150px; object-fit: cover; border-radius: 50%;">
+        {% if avatar and avatar.imagen %}
+            <img src="{{ avatar.imagen.url }}" alt="{{ user.username }} Avatar" style="width: 150px; height: 150px; object-fit: cover; border-radius: 50%;">
         {% else %}
             <img src="{% static 'img/default_avatar.png' %}" alt="Avatar por defecto" style="width: 150px; height: 150px; object-fit: cover; border-radius: 50%;">
         {% endif %}
@@ -26,9 +27,9 @@
     <h3>Datos de Cuenta:</h3>
     <ul>
         <li><strong>Usuario:</strong> {{ user.username }}</li>
-        <li><strong>Nombre:</strong> {{ user.first_name }}</li>
-        <li><strong>Apellido:</strong> {{ user.last_name }}</li>
-        <li><strong>Correo Electrónico:</strong> {{ user.email }}</li>
+        <li><strong>Nombre:</strong> {{ user.first_name|default:"N/A" }}</li>
+        <li><strong>Apellido:</strong> {{ user.last_name|default:"N/A" }}</li>
+        <li><strong>Correo Electrónico:</strong> {{ user.email|default:"N/A" }}</li>
         <li><strong>Fecha de Ingreso:</strong> {{ user.date_joined|date:"d M Y" }}</li>
     </ul>
 
@@ -37,7 +38,7 @@
     <h3>Opciones de Cuenta:</h3>
     <ul>
         <li>
-            <a href="{% url 'editar_perfil' %}">⚙️ Editar datos personales</a>
+            <a href="{% url 'editarPerfil' %}">⚙️ Editar datos personales</a>
         </li>
         <li>
             <a href="{% url 'password_change' %}">🔒 Cambiar contraseña</a>

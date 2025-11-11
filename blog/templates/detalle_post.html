@@ -7,10 +7,10 @@
     <h2>{{ post.titulo }}</h2>
     <h3>{{ post.subtitulo }}</h3>
     
-    <p>Por: {{ post.autor }} | Publicado: {{ post.fecha_creacion|date:"d M Y" }}</p>
+    <p>Por: <strong>{{ post.autor }}</strong> | Publicado: {{ post.fecha_creacion|date:"d M Y" }} | Categoría: {{ post.categoria|default:"Sin Categoría" }}</p>
     
     {% if post.imagen %}
-        <img src="{{ post.imagen.url }}" alt="{{ post.titulo }}" style="max-width: 100%;">
+        <img src="{{ post.imagen.url }}" alt="{{ post.titulo }}" style="max-width: 100%; height: auto; border-radius: 8px; margin-bottom: 15px;">
     {% endif %}
 
     <hr>
@@ -21,13 +21,13 @@
     
     <hr>
     
-    {% if request.user.is_authenticated %}
+    {% if request.user.is_authenticated and request.user == post.creado_por %}
     <p>
         <a href="{% url 'editar_post' post.pk %}">✏️ Editar Post</a> | 
         <a href="{% url 'eliminar_post' post.pk %}">🗑️ Eliminar Post</a>
     </p>
     {% endif %}
     
-    <p><a href="{% url 'Inicio' %}">Volver al Listado</a></p>
+    <p><a href="{% url 'inicio' %}">Volver al Listado</a></p>
 
 {% endblock %}

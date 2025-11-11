@@ -6,7 +6,7 @@
 {% block contenido_que_cambia %}
 
     <h2>📝 Editar Mi Perfil</h2>
-    <p>Modifica tu información de usuario (nombre, apellido, email).</p>
+    <p>Modifica tu información de usuario (nombre, apellido, email, etc.).</p>
     
     <div style="margin-bottom: 20px;">
         <a href="{% url 'agregar_avatar' %}" class="btn-link">🖼️ **Subir o Cambiar Avatar**</a>
@@ -15,12 +15,6 @@
     <form method="POST">
         {% csrf_token %} 
         
-        {% if messages %}
-            {% for message in messages %}
-                <div class="mensaje">{{ message }}</div>
-            {% endfor %}
-        {% endif %}
-
         {{ form.as_p }}
         
         <input type="submit" value="Guardar Cambios">
@@ -30,8 +24,8 @@
     
     <p>
         <a href="{% url 'perfil' %}">Cancelar y Volver al Perfil</a> | 
+        
         <a href="{% url 'password_change' %}">Cambiar Contraseña</a> 
     </p>
 
 {% endblock %}
-

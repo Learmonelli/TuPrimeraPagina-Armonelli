@@ -3,10 +3,10 @@
 {% block titulo %}Buscar Post{% endblock %}
 
 {% block contenido_que_cambia %}
-    <h2>Buscar Post por Título</h2>
+    <h2>🔍 Buscar Post por Título</h2>
 
-    <form method="GET" action="{% url 'BuscarPost' %}">
-        {% csrf_token %} {{ formulario.as_p }}
+    <form method="GET" action="{% url 'buscar_post' %}">
+        {{ formulario.as_p }}
         
         <input type="submit" value="Buscar">
     </form>
@@ -17,12 +17,16 @@
         <h3>Resultados para "{{ criterio }}"</h3>
         
         {% if posts %}
-            <ul>
+            <ul style="list-style: none; padding: 0;">
             {% for post in posts %}
-                <li>
-                    <h4>{{ post.titulo }} (ID: {{ post.id }})</h4>
-                    <p>{{ post.subtitulo }}</p>
-                    <p>Autor: {{ post.autor }}</p>
+                <li style="border: 1px solid #eee; padding: 10px; margin-bottom: 10px; border-radius: 4px;">
+                    <h4 style="margin-top: 0;">
+                        <a href="{% url 'detalle_post' post.pk %}" style="text-decoration: none; color: #007bff;">
+                            {{ post.titulo }}
+                        </a>
+                    </h4>
+                    <p style="margin: 5px 0;">{{ post.subtitulo }}</p>
+                    <small>Autor: {{ post.autor }}</small>
                 </li>
             {% endfor %}
             </ul>

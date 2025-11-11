@@ -5,18 +5,24 @@
 {% block contenido_que_cambia %}
     <h2>Últimos Posts Publicados</h2>
 
-    {% if mensaje %}
-        <p class="mensaje">{{ mensaje }}</p>
-    {% endif %}
-
     {% if posts %}
-        <ul>
+        <ul style="list-style: none; padding: 0;">
         {% for post in posts %}
-            <li>
-                <h3>{{ post.titulo }}</h3>
-                <p><strong>{{ post.subtitulo }}</strong></p>
-                <p>{{ post.cuerpo|truncatechars:200 }}</p>
-                <small>Por: <strong>{{ post.autor }}</strong> | Categoría: {{ post.categoria }} | Creado: {{ post.fecha_creacion }}</small>
+            <li style="border: 1px solid #ddd; padding: 15px; margin-bottom: 20px; border-radius: 6px;">
+                <a href="{% url 'detalle_post' post.pk %}" style="text-decoration: none; color: #333;">
+                    <h3 style="color: #007bff; margin-top: 0;">{{ post.titulo }}</h3>
+                    <p style="font-weight: bold;">{{ post.subtitulo }}</p>
+                    <p>{{ post.cuerpo|truncatechars:200 }} 
+                       <span style="color: #007bff; font-weight: bold;">[...seguir leyendo]</span>
+                    </p>
+                </a>
+                
+                <small style="display: block; margin-top: 10px; border-top: 1px dashed #eee; padding-top: 5px;">
+                    Por: <strong>{{ post.autor }}</strong> 
+                    | Categoría: 
+                    {{ post.categoria|default:"Sin Categoría" }} 
+                    | Creado: {{ post.fecha_creacion|date:"d M, Y H:i" }}
+                </small>
             </li>
         {% endfor %}
         </ul>
