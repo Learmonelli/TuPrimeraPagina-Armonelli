@@ -55,26 +55,26 @@
     <header>
     <h1>Mi Blog MVT</h1>
     <nav>
-        <a href="{% url 'inicio' %}">Inicio</a> |
-        <a href="{% url 'crear_autor' %}">👤 Crear Autor</a> |
-        <a href="{% url 'crear_categoria' %}">🏷️ Crear Categoría</a> |
-        <a href="{% url 'crear_post' %}">✍️ Crear Post</a> |
-        <a href="{% url 'buscar_post' %}">🔍 Buscar Post</a>
-        
-        |
+    <a href="{% url 'inicio' %}">Inicio</a> |
+    <a href="{% url 'crear_autor' %}">👤 Crear Autor</a> |
+    <a href="{% url 'crear_categoria' %}">🏷️ Crear Categoría</a> |
+    <a href="{% url 'crear_post' %}">✍️ Crear Post</a> |
+    <a href="{% url 'buscar_post' %}">🔍 Buscar Post</a> |
+    <a href="{% url 'about' %}">Acerca de Mí</a>
 
-        {% if user.is_authenticated %}
-            <a href="{% url 'bandeja_entrada' %}">📥 Mensajes</a> |
-            <a href="{% url 'enviar_mensaje' %}">✉️ Enviar Mensaje</a> |
-            <a href="{% url 'perfil' %}">👋 Perfil de **{{ user.username }}**</a> |
-            <a href="{% url 'editarPerfil' %}">⚙️ Editar Perfil</a> |
-            <a href="{% url 'logout' %}">🚪 Cerrar Sesión</a>
-        {% else %}
-            <a href="{% url 'login' %}">🔑 Iniciar Sesión</a> |
-            <a href="{% url 'registro' %}">📝 Registro</a>
-        {% endif %}
-        <li><a href="{% url 'about' %}">Acerca de Mí</a></li>
-    </nav>
+    |
+
+    {% if user.is_authenticated %}
+        <a href="{% url 'bandeja_entrada' %}">📥 Mensajes</a> |
+        <a href="{% url 'enviar_mensaje' %}">✉️ Enviar</a> |
+        <a href="{% url 'perfil' %}">👋 Perfil de **{{ user.username }}**</a> |
+        <a href="{% url 'editarPerfil' %}">⚙️ Editar</a> |
+        <a href="{% url 'logout' %}">🚪 Cerrar Sesión</a>
+    {% else %}
+        <a href="{% url 'login' %}">🔑 Iniciar Sesión</a> |
+        <a href="{% url 'registro' %}">📝 Registro</a>
+    {% endif %}
+</nav>
 </header>
     
     <main>

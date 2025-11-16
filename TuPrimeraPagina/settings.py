@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'accounts',
     'blog',
     'mensajes',
 ]
@@ -137,3 +138,35 @@ MEDIA_URL = '/media/'
 
 # Define la ruta física donde se guardarán los archivos en el sistema (ej: D:/cursos/miprimerpagina/media)
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+# 2. Configuración de Archivos Estáticos y Media (Avatars/Imágenes de Post)
+# =================================================================
+import os
+
+# Directorio base del proyecto
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+# Directorio donde Django buscará los archivos MEDIA (ej. Avatars, imágenes de Posts)
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media') # Crea una carpeta 'media' en la raíz del proyecto
+
+# 3. Configuración de Autenticación
+# =================================================================
+# URL a la que redirigir después de iniciar sesión (¡Importante!)
+LOGIN_REDIRECT_URL = 'inicio' 
+
+# URL a la que redirigir después de cerrar sesión (¡Importante!)
+LOGOUT_REDIRECT_URL = 'login' # o 'inicio', según lo prefieras, 'login' es la URL de Django Auth
+                                # En tu plantilla 'logged_out.html' usas 'login'.
+
+# 4. Configuración de Mensajes (messages)
+# =================================================================
+from django.contrib.messages import constants as messages
+
+# Mapeo de tags para el CSS en base.html
+MESSAGE_TAGS = {
+    messages.DEBUG: 'alert-info',
+    messages.INFO: 'alert-info',
+    messages.SUCCESS: 'success', # Usado en tu CSS de base.html
+    messages.WARNING: 'warning', # Usado en tu CSS de base.html
+    messages.ERROR: 'error',     # Usado en tu CSS de base.html
+}

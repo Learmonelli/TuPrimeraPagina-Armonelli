@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block titulo %}Registro de Usuario{% endblock %}
+
+{% block contenido_que_cambia %}
+
+    <h2>📝 Registro de Usuario</h2>
+    <hr>
+
+    <p>Completa los campos para crear tu cuenta:</p>
+
+    <form method="post" novalidate>
+        {% csrf_token %}
+
+        <div style="margin-bottom: 15px;">
+            {{ form.username.label_tag }}<br>
+            {{ form.username }}
+            {% if form.username.errors %}
+                <div style="color: red;">{{ form.username.errors }}</div>
+            {% endif %}
+        </div>
+
+        <div style="margin-bottom: 15px;">
+            {{ form.email.label_tag }}<br>
+            {{ form.email }}
+            {% if form.email.errors %}
+                <div style="color: red;">{{ form.email.errors }}</div>
+            {% endif %}
+        </div>
+
+        <div style="margin-bottom: 15px;">
+            {{ form.password1.label_tag }}<br>
+            {{ form.password1 }}
+            {% if form.password1.errors %}
+                <div style="color: red;">{{ form.password1.errors }}</div>
+            {% endif %}
+        </div>
+
+        <div style="margin-bottom: 15px;">
+            {{ form.password2.label_tag }}<br>
+            {{ form.password2 }}
+            {% if form.password2.errors %}
+                <div style="color: red;">{{ form.password2.errors }}</div>
+            {% endif %}
+        </div>
+
+        <button type="submit" style="background-color: #28a745; color: white; padding: 10px 15px; border-radius: 5px; font-weight: bold;">
+            Crear Cuenta
+        </button>
+    </form>
+
+    <hr>
+
+    <p>¿Ya tienes cuenta? <a href="{% url 'login' %}">Inicia sesión aquí</a></p>
+
+{% endblock %}
